@@ -1,0 +1,21 @@
+.contacts__list {
+    width: 300px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.contact__btn {
+    padding: 6px;
+    border: 1px solid #020202;
+    border-radius: 4px;
+
+}
