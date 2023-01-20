@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { fetchContacts } from './operations';
 
 const persistConfig = {
   key: 'contacts',
@@ -19,7 +20,14 @@ const persistConfig = {
 
 const contactsSlice = createSlice({
   name: 'myContacts',
-  initialState: { contacts: [], filter: '' },
+  initialState: {
+    contacts: {
+      items: [],
+      isLoading: false,
+      error: null,
+    },
+    filter: '',
+  },
   reducers: {
     addContact(state, action) {
       state.contacts.push(action.payload);
@@ -35,12 +43,30 @@ const contactsSlice = createSlice({
       state.filter = action.payload;
     },
   },
+  extraReducers: {
+    [fetchContacts.pending](state, action) {
+      state.isLoading = true;
+    },
+    [fetchContacts.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items = action.payload;
+    },
+    [fetchContacts.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+  },
 });
 
 const persistedReducer = persistReducer(persistConfig, contactsSlice.reducer);
 
-export const { addContact, deleteContact, filterContacts } =
-  contactsSlice.actions;
+export const {
+  addContact,
+  deleteContact,
+  filterContacts,
+  fetchingContactsSucces,
+} = contactsSlice.actions;
 
 export const store = configureStore({
   reducer: {

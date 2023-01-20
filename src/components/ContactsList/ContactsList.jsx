@@ -16,7 +16,7 @@ export const ContactsList = () => {
         return (
           <Contact
             name={contact.name}
-            number={contact.number}
+            number={contact.phone}
             key={contact.id}
             id={contact.id}
           />
