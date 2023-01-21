@@ -1,19 +1,14 @@
 import css from './ContactsList.module.css';
-import { deleteContact } from 'redux/store';
+import { deleteContact } from 'redux/operations';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchContacts } from './../../redux/operations';
 
-export const Contact = ({ name, phone, id }) => {
+export const Contact = ({ name, number, id }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
   return (
     <li className={css.contact__item}>
       <p>
-        {name}: {phone}
+        {name}: {number}
       </p>
       <button
         className={css.contact__btn}

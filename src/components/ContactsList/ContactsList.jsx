@@ -1,9 +1,16 @@
 import { Contact } from './Contact';
 import css from './ContactsList.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchContacts } from './../../redux/operations';
 
 export const ContactsList = () => {
-  const contacts = useSelector(state => state.myContacts.contacts);
+  const contacts = useSelector(state => state.myContacts.contacts.items);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const filter = useSelector(state => state.myContacts.filter);
   const filteredContacts = contacts.filter(contact => {
