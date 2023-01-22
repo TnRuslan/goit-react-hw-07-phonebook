@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { filterContacts } from 'redux/store';
+import { filterContacts } from 'redux/contactsSlice';
 
 export const Filter = () => {
   const [filter, setFilter] = useState('');
